@@ -27,6 +27,15 @@ This project is a **YouTube to MP3 Converter** web application built with a **Re
 -  **MP3 Conversion**: `moviepy`
 
   
+## Requirements
+
+Before you can run this YouTube to MP3 Converter application, you need to ensure that the following tools and dependencies are installed on your system.
+
+- **Python3** 
+- **Node.js and npm** 
+- **ffmpeg and ffprobe**
+
+
 
 ## Installation
 
