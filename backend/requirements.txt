@@ -3,5 +3,4 @@ pytube
 moviepy
 pytest
 Flask-CORS
-yt-dlplp
-
+yt-dlp
