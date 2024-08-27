@@ -1,14 +1,10 @@
 # YouTube-to-MP3 Converter
 
-  
-
-A simple web application that converts YouTube videos to MP3 format using a React frontend and a Python Flask backend. This project is open-source under the [MIT](./LICENSE).
+This project is a **YouTube to MP3 Converter** web application built with a **React frontend** and a **Flask backend**. The application allows users to enter a YouTube video URL, and in return, it provides an MP3 audio file that can be downloaded directly to their device. This project is open-source under the [MIT](./LICENSE).
 
   
 
 ## Features
-
-  
 
 - Enter a YouTube video URL to convert the video to an MP3 file.
 
@@ -22,8 +18,6 @@ A simple web application that converts YouTube videos to MP3 format using a Reac
 
 ## Technologies Used
 
-  
-
 -  **Frontend**: React.js
 
 -  **Backend**: Python (Flask)
@@ -36,14 +30,11 @@ A simple web application that converts YouTube videos to MP3 format using a Reac
 
 ## Installation
 
-  
-
 ### Backend Setup (Python)
 
 1. Navigate to the `backend` directory:
 
 `cd backend`
-
 
 2. Create a virtual environment to isolate project dependencies:
 
@@ -56,9 +47,6 @@ A simple web application that converts YouTube videos to MP3 format using a Reac
 `source venv/bin/activate`
 
 - On **Windows**:
-
-  
-
 `venv\Scripts\activate`
 
 4. Install the required Python dependencies:
@@ -75,11 +63,7 @@ The backend will be running at `http://localhost:5000`.
 
 `deactivate`
 
-  
-
 ### Frontend Setup (React)
-
-  
 
 1. Navigate to the `frontend` directory:
 
@@ -120,7 +104,6 @@ This project includes a Bash script (`start.sh`) that will start both the **back
 3.  **Quitting the Servers:**
     
     If you wish to stop the servers, press `CTRL + C` in the terminal. The script will automatically stop both the backend and frontend servers.
-    
 
 ### Troubleshooting:
 
@@ -141,15 +124,16 @@ This project includes a Bash script (`start.sh`) that will start both the **back
   
 
 ## License
-
-  
-
-This project is licensed under the MIT license. See the LICENSE file for details.
-
-  
+This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for details.
 
 ## Contributing
 
-  
-
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
+
+## Contact Information
+
+For any inquiries, please contact:
+
+- **Name:** [Kyriakos Antoniadis]
+- **Email:** [kuriakosant2003@gmail.com]
+- **LinkedIn:** [https://www.linkedin.com/in/kyriakos-antoniadis-288444326/]
