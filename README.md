@@ -53,11 +53,11 @@ Before you can run this YouTube to MP3 Converter application, you need to ensure
 
 `cd backend`
 
-2. Create a virtual environment to isolate project dependencies:
+2. Create a virtual environment to isolate project dependencies( you only need to do this once ):
 
 `python3 -m venv venv`
 
-3. Activate the virtual environment:
+3. Activate the virtual environment :
 
 - On **Linux/MacOS**:
 

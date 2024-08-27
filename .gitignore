@@ -27,6 +27,8 @@ yarn-error.log*
 backend/temp-downloaded-files
 /temp-downloaded-files
 temp-downloaded-files
+downloaded-files
+
 # Logs
 logs
 *.log
