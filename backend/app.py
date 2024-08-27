@@ -22,6 +22,20 @@ def clean_up_download_dir():
     except Exception as e:
         print(f"Error cleaning up directory: {e}")
 
+# Progress variable to track download progress
+conversion_progress = {}
+
+def progress_hook(d):
+    if d['status'] == 'downloading':
+        # Update conversion progress with percentage
+        conversion_progress['status'] = 'downloading'
+        conversion_progress['percent'] = d.get('_percent_str', '0%')
+        conversion_progress['speed'] = d.get('_speed_str', 'N/A')
+        conversion_progress['eta'] = d.get('_eta_str', 'N/A')
+    elif d['status'] == 'finished':
+        conversion_progress['status'] = 'finished'
+        conversion_progress['percent'] = '100%'
+
 @app.route('/video-info', methods=['POST'])
 def video_info():
     try:
@@ -57,6 +71,9 @@ def convert():
         if not url:
             return jsonify({'error': 'URL is required'}), 400
 
+        # Reset conversion progress for a new conversion
+        conversion_progress.clear()
+
         # Fetch video info to use the title as the filename
         ydl_opts = {}
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -69,6 +86,7 @@ def convert():
         ydl_opts = {
             'format': 'bestaudio/best',
             'outtmpl': download_path,  # Save to the temp-download-files directory
+            'progress_hooks': [progress_hook],  # Hook to track progress
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
@@ -103,8 +121,12 @@ def convert():
 
     except Exception as e:
         print(f"Error during conversion: {str(e)}")
-        return jsonify({'error': f'Error during video conversion: {str(e)}'}), 500
+        return jsonify ({'error': f'Error during video conversion: {str(e)}'}), 500
 
+@app.route('/progress', methods=['GET'])
+def get_progress():
+    """API to get the current progress of the conversion"""
+    return jsonify(conversion_progress)
 
 if __name__ == '__main__':
     app.run(debug=True)
