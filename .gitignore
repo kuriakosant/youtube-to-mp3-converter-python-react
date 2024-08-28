@@ -26,6 +26,7 @@ yarn-error.log*
 #Downloaded audios 
 backend/downloaded-files
 /downloaded-files
+downloaded-files
 # Logs
 logs
 *.log

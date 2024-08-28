@@ -1,4 +1,4 @@
-/* Center everything */
+/* General Styles */
 body, html {
   margin: 0;
   padding: 0;
@@ -8,20 +8,19 @@ body, html {
 
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.converter-container {
+.converter-container, .about-container {
   background-color: white;
-  width: 100%;
   max-width: 500px;
+  margin: 0 auto;
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin-top: 50px;
 }
 
 h1 {
@@ -30,7 +29,11 @@ h1 {
   color: #333;
 }
 
-/* Input and button section */
+.about-container p {
+  font-size: 18px;
+}
+
+/* Input and Button Section */
 .input-section {
   display: flex;
   flex-direction: column;
@@ -45,7 +48,7 @@ h1 {
   font-size: 16px;
   box-sizing: border-box;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .input-box:focus {
@@ -62,7 +65,7 @@ h1 {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .convert-btn:hover {
@@ -77,4 +80,45 @@ h1 {
 .error-text {
   color: red;
   font-size: 14px;
+}
+
+/* Header Styles */
+.header {
+  background-color: #333;
+  padding: 20px;
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
 }
