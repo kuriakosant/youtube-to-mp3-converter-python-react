@@ -14,7 +14,7 @@ A simple web application that converts YouTube videos to MP3 format using a Reac
 
 - **Frontend**: React.js
 - **Backend**: Python (Flask)
-- **Video Download**: `pytube`
+- **Video Download**: `yt-dlplp`
 - **MP3 Conversion**: `moviepy`
 
 ## Installation
