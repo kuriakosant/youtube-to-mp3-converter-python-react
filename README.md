@@ -3,7 +3,7 @@
 This project is a **YouTube to MP3 Converter** web application built with a **React frontend** and a **Flask backend**. The application allows users to enter a YouTube video URL, and in return, it provides an MP3 audio file that can be downloaded directly to their device. This project is open-source under the [MIT](./LICENSE).
 
   
-## Prokect Screenshots
+## Project Screenshots
 
 #### Home Page
 ![Home Page](./assets/homepage.png)
@@ -12,17 +12,19 @@ This project is a **YouTube to MP3 Converter** web application built with a **Re
 ![Conversion Process](./assets/conversion.png)
 
 
+
 ## Features
 
-- Enter a YouTube video URL to convert the video to an MP3 file.
+-   **YouTube Video Info Fetching**: Enter a YouTube video URL and the app displays the video title, thumbnail, and duration before converting.
 
-- Backend built using Python's Flask.
+-   **MP3 Conversion**: Converts YouTube videos to MP3 format using `yt-dlp` and `ffmpeg`.
 
-- Frontend built with React.js.
+-   **Download Directly**: After conversion, the MP3 file is made available for download in the browser, the user is then prompted to choose a download directory on their machine.
 
-- Uses `pytube` to download YouTube videos.
+-   **Temporary File Cleanup**: The backend uses a temporary folder to store downloaded files before conversion( temp-downloaded-files), the contents of this folder are cleaned up after conversion to avoid bloat.
 
-- Converts video files to MP3 using `moviepy`.
+-   **Responsive UI**: User-friendly design with smooth animations and interactive elements.
+
 
 ## Technologies Used
 
@@ -30,7 +32,7 @@ This project is a **YouTube to MP3 Converter** web application built with a **Re
 
 -  **Backend**: Python (Flask)
 
--  **Video Download**: `yt-dlplp`
+-  **Video Download**: `yt-dlp`
 
 -  **MP3 Conversion**: `moviepy`
 
