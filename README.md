@@ -35,8 +35,6 @@ Before you can run this YouTube to MP3 Converter application, you need to ensure
 - **Node.js and npm** 
 - **ffmpeg and ffprobe**
 
-
-
 ## Installation
 
 ### Backend Setup (Python)
