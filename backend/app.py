@@ -1,14 +1,12 @@
 from flask import Flask, request, jsonify, send_file
-import os
+import io
 from flask_cors import CORS
 import yt_dlp
+import tempfile
+import os
 
 app = Flask(__name__)
-CORS(app)
-
-# Ensure the 'downloaded-files' directory exists
-if not os.path.exists('downloaded-files'):
-    os.makedirs('downloaded-files')
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/video-info', methods=['POST'])
 def video_info():
@@ -52,40 +50,38 @@ def convert():
             info = ydl.extract_info(url, download=False)
             title = info.get('title')
 
-        # Specify the path where the file should be downloaded
-        download_path = os.path.join('downloaded-files', f'{title}.%(ext)s')
+        # Use a temporary file to download the audio, but not save it permanently
+        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=True) as temp_file:
+            ydl_opts = {
+                'format': 'bestaudio/best',
+                'outtmpl': temp_file.name,  # Save to temporary file
+                'postprocessors': [{
+                    'key': 'FFmpegExtractAudio',
+                    'preferredcodec': 'mp3',
+                    'preferredquality': '192',
+                }],
+            }
 
-        # Use yt-dlp to download the audio from the YouTube video
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': download_path,  # Save the file using the video title
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
-
-        try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
 
-            mp3_file = os.path.join('downloaded-files', f'{title}.mp3')
+            temp_file.seek(0)  # Move to the beginning of the file
 
-            # Send the MP3 file as a response
-            return send_file(mp3_file, as_attachment=True)
+            # Serve the file directly to the user
+            return send_file(
+                io.BytesIO(temp_file.read()),
+                mimetype='audio/mpeg',
+                as_attachment=True,
+                download_name=f"{title}.mp3"  # Use the video title as the filename
+            )
 
-        except yt_dlp.utils.DownloadError as e:
-            print(f"DownloadError: {e}")
-            return jsonify({'error': f'Error during video download: {str(e)}'}), 500
-
-        except Exception as e:
-            print(f"Error during video download: {str(e)}")
-            return jsonify({'error': f'Error during video download: {str(e)}'}), 500
+    except yt_dlp.utils.DownloadError as e:
+        print(f"DownloadError: {e}")
+        return jsonify({'error': f'Error during video download: {str(e)}'}), 500
 
     except Exception as e:
         print(f"Error during conversion: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': f'Error during video conversion: {str(e)}'}), 500
 
 
 if __name__ == '__main__':
