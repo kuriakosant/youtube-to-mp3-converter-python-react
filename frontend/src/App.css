@@ -57,6 +57,7 @@ h1 {
   outline: none;
 }
 
+/* Convert Button */
 .convert-btn {
   background-color: #ff5722;
   color: white;
@@ -66,7 +67,9 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding-top: 10px ;
+  
+  /* Additional margin when the button text is 'Convert' */
+  margin-top: 20px;
 }
 
 .convert-btn:hover {
@@ -78,6 +81,7 @@ h1 {
   cursor: not-allowed;
 }
 
+/* Error Message */
 .error-text {
   color: red;
   font-size: 14px;

@@ -1,28 +1,28 @@
-/* Progress bar container */
+/* Progress Bar Styles */
 .progress-container {
-    width: 100%;
-    margin-bottom: 20px; /* Add margin to separate from button */
-  }
-  
-  .progress-bar {
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 30px;
-    width: 100%;
-    position: relative;
-  }
-  
-  .progress-bar-inner {
-    background-color: #ff5722; /* Orange color for progress */
-    height: 100%;
-    border-radius: 20px;
-    width: 0%;
-    transition: width 0.4s ease-in-out; /* Smooth animation */
-    text-align: center;
-    color: white;
-    line-height: 30px;
-    font-weight: bold;
-    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
-  }
-  
+  width: 100%;
+  margin-bottom: 10px; /* Move progress bar 10px lower */
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  overflow: hidden;
+  height: 30px;
+  width: 100%;
+  position: relative;
+  margin-top: 10px; /* Added margin to move it lower */
+}
+
+.progress-bar-inner {
+  background-color: #ff5722;
+  height: 100%;
+  border-radius: 20px;
+  width: 0%;
+  transition: width 0.4s ease-in-out;
+  text-align: center;
+  color: white;
+  line-height: 30px;
+  font-weight: bold;
+  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
