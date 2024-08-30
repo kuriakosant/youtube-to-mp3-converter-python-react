@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import 'styles/Thumbnail.css'; // Import the Thumbnail CSS file
 import 'styles/ProgressBar.css'; // Import the Progress Bar CSS file
@@ -11,20 +11,6 @@ function Home() {
   const [error, setError] = useState(null);
   const [converted, setConverted] = useState(false); // Track if the video was converted
 
-  useEffect(() => {
-    if (downloading) {
-      const interval = setInterval(async () => {
-        try {
-          const { data } = await axios.get('http://localhost:5000/progress');
-          setProgress(data.percent);
-        } catch (err) {
-          console.error('Error fetching progress:', err);
-        }
-      }, 1000);
-      return () => clearInterval(interval); // Clean up the interval
-    }
-  }, [downloading]);
-
   const handleConvert = async () => {
     setDownloading(true);
     setError(null);
@@ -35,10 +21,28 @@ function Home() {
       const videoInfoResponse = await axios.post('http://localhost:5000/video-info', { url });
       setVideoInfo(videoInfoResponse.data);
 
-      // Convert video
-      await axios.post('http://localhost:5000/convert', { url }, {
-        responseType: 'blob',
-      });
+      // Convert video and track progress
+      const response = await axios.post(
+        'http://localhost:5000/convert', 
+        { url },
+        {
+          responseType: 'blob', 
+          onDownloadProgress: (progressEvent) => {
+            const total = progressEvent.total;
+            const current = progressEvent.loaded;
+            const percentCompleted = Math.floor((current / total) * 100);
+            setProgress(percentCompleted);
+          }
+        }
+      );
+
+      // Create a URL for the downloaded MP3 file
+      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.setAttribute('download', `${videoInfoResponse.data.title}.mp3`); // Use the video title as filename
+      document.body.appendChild(link);
+      link.click();
 
       // Mark as converted
       setConverted(true);

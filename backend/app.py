@@ -64,7 +64,6 @@ def video_info():
 
 @app.route('/convert', methods=['POST'])
 def convert():
-    global conversion_progress
     try:
         data = request.json
         url = data.get('url')
@@ -72,7 +71,8 @@ def convert():
         if not url:
             return jsonify({'error': 'URL is required'}), 400
 
-        conversion_progress = {}
+        # Reset conversion progress for a new conversion
+        conversion_progress.clear()
 
         # Fetch video info to use the title as the filename
         ydl_opts = {}
@@ -100,15 +100,16 @@ def convert():
 
         mp3_file = os.path.join(DOWNLOAD_DIR, f'{title}.mp3')
 
-        # Ensure that we clean up the directory after the file is served
-        @after_this_request
-        def cleanup(response):
-            clean_up_download_dir()
-            return response
+        # Serve the file to the user and clean up
+        with open(mp3_file, 'rb') as file_data:
+            data = file_data.read()
 
-        # Serve the file to the browser
+        # Clean up the temp directory after serving the file
+        clean_up_download_dir()
+
+        # Send the MP3 file as a response
         return send_file(
-            mp3_file,
+            io.BytesIO(data),
             mimetype='audio/mpeg',
             as_attachment=True,
             download_name=f"{title}.mp3"
