@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'styles/Thumbnail.css'; // Import the Thumbnail CSS file
 import 'styles/ProgressBar.css'; // Import the Progress Bar CSS file
@@ -10,6 +10,26 @@ function Home() {
   const [progress, setProgress] = useState(0); // Progress state
   const [error, setError] = useState(null);
   const [converted, setConverted] = useState(false); // Track if the video was converted
+
+  // Fetch progress from the backend every second
+  useEffect(() => {
+    let interval = null;
+    if (downloading) {
+      interval = setInterval(async () => {
+        try {
+          const { data } = await axios.get('http://localhost:5000/progress');
+          if (data.percent) {
+            const percentValue = parseFloat(data.percent.replace('%', '')); // Ensure percent is parsed as a number
+            setProgress(percentValue);
+          }
+        } catch (err) {
+          console.error('Error fetching progress:', err);
+        }
+      }, 1000);
+    }
+
+    return () => clearInterval(interval); // Cleanup on component unmount or when downloading is false
+  }, [downloading]);
 
   const handleConvert = async () => {
     setDownloading(true);
@@ -25,15 +45,7 @@ function Home() {
       const response = await axios.post(
         'http://localhost:5000/convert', 
         { url },
-        {
-          responseType: 'blob', 
-          onDownloadProgress: (progressEvent) => {
-            const total = progressEvent.total;
-            const current = progressEvent.loaded;
-            const percentCompleted = Math.floor((current / total) * 100);
-            setProgress(percentCompleted);
-          }
-        }
+        { responseType: 'blob' }
       );
 
       // Create a URL for the downloaded MP3 file
