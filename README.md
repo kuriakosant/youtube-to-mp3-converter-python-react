@@ -6,10 +6,13 @@ This project is a **YouTube to MP3 Converter** web application built with a **Re
 ## Project Screenshots
 
 #### Home Page
-![Home Page](./assets/homepage.png)
+![Home Page](./ProjectScreenshots/home.png)
 
 #### Conversion Process
-![Conversion Process](./assets/conversion.png)
+![Conversion Process](./ProjectScreenshots/conversion1.png)
+
+#### Converting another video , after conversion is complete.
+![Converting another Video](./ProjectScreenshots/final.png)
 
 
 
@@ -100,7 +103,7 @@ The frontend will be running at `http://localhost:3000` you can use the applicat
 
 This project includes a Bash script (`start.sh`) that will start both the **backend** and **frontend** servers with a single command. This only works on UNIX systems like linux or macOS , if you are on windows please follow the previous usage instructions. 
 
-**Note: This script only runs the servers , for the app to actually work you still need to install the dependencies for both the backend and frontend.**
+**Note: This script only runs the servers inside the same terminal, for the app to actually work you still need to install the dependencies for both the backend and frontend manually like in the instructions above.**
 
 ### Running the Script:
 
