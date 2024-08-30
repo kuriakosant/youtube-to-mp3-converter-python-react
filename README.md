@@ -15,18 +15,21 @@ This project is a **YouTube to MP3 Converter** web application built with a **Re
 ![Converting another Video](./ProjectScreenshots/final.png)
 
 
-
 ## Features
 
--   **YouTube Video Info Fetching**: Enter a YouTube video URL and the app displays the video title, thumbnail, and duration before converting.
+- **URL Input**: Users can input a YouTube video URL to fetch video information and convert the video to an MP3 file.
 
--   **MP3 Conversion**: Converts YouTube videos to MP3 format using `yt-dlp` and `ffmpeg`.
+- **Video info extraction and display**: After a user inputs a YouTube video URL the title , duration and thumbnail of that video is displayed before conversion.
 
--   **Download Directly**: After conversion, the MP3 file is made available for download in the browser, the user is then prompted to choose a download directory on their machine.
+- **MP3 Conversion**: Converts YouTube videos to MP3 format using `yt-dlp` and `ffmpeg`.
 
--   **Temporary File Cleanup**: The backend uses a temporary folder to store downloaded files before conversion( temp-downloaded-files), the contents of this folder are cleaned up after conversion to avoid bloat.
+- **Download Progress Bar**: Real-time download progress tracking with a progress bar, displays the progress of the video conversion and download.
 
--   **Responsive UI**: User-friendly design with smooth animations and interactive elements.
+- **MP3 File Download**: Supports downloading MP3 files directly to the browser, after conversion, users can download the MP3 file directly from their browser.
+
+- **Temporary File Cleanup**: The backend uses a temporary folder to store downloaded files before conversion( temp-downloaded-files), the contents of this folder are cleaned up after conversion to avoid bloat.
+
+- **Responsive UI**: User-friendly design with smooth animations and interactive elements.
 
 
 ## Technologies Used
