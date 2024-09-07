@@ -1,8 +1,7 @@
 from flask import Flask, request, jsonify, send_file
-from pytube import YouTube
 import os
-from moviepy.editor import VideoFileClip
 from flask_cors import CORS
+import yt_dlp
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -16,36 +15,37 @@ def convert():
         if not url:
             return jsonify({'error': 'URL is required'}), 400
 
-        # Debugging line to check if the URL is coming through
         print(f"Received URL: {url}")
 
-        # Download the YouTube video
-        from urllib.error import HTTPError
+        # Use yt-dlp to download the audio from the YouTube video
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': 'downloaded_audio.%(ext)s',  # Saves the file as "downloaded_audio"
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
 
         try:
-            yt = YouTube(url)
-            video_stream = yt.streams.filter(only_audio=True).first()
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
 
-            if not video_stream:
-                return jsonify({'error': 'No audio streams found for this video'}), 500
+            mp3_file = 'downloaded_audio.mp3'
 
-            video_file = video_stream.download(filename='downloaded_video.mp4')
+            # Send the MP3 file as a response
+            return send_file(mp3_file, as_attachment=True)
 
-        except HTTPError as e:
-            print(f"HTTPError: {e}")
-            return jsonify({'error': f'HTTPError during video download: {e}'}), 500
-
-        except Exception as e:
-            print(f"Error during video download: {e}")
-            return jsonify({'error': f'Error during video download: {e}'}), 500
-
+        except yt_dlp.utils.DownloadError as e:
+            print(f"DownloadError: {e}")
+            return jsonify({'error': f'Error during video download: {str(e)}'}), 500
 
         except Exception as e:
             print(f"Error during video download: {str(e)}")
             return jsonify({'error': f'Error during video download: {str(e)}'}), 500
 
     except Exception as e:
-        # Print the full error to the logs
         print(f"Error during conversion: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
