@@ -23,6 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#Downloaded audios 
+backend/downloaded-files
+/downloaded-files
 # Logs
 logs
 *.log
