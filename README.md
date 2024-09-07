@@ -1,6 +1,6 @@
 # YouTube-to-MP3 Converter
 
-A simple web application that converts YouTube videos to MP3 format using a React frontend and a Python Flask backend. This project is open-source under the [GNU GPL v3 License](./LICENSE).
+A simple web application that converts YouTube videos to MP3 format using a React frontend and a Python Flask backend. This project is open-source under the [MIT](./LICENSE).
 
 ## Features
 
@@ -24,17 +24,34 @@ A simple web application that converts YouTube videos to MP3 format using a Reac
    ```bash
    cd backend`` 
 
-2.  Install the required Python dependencies:
+2.  Create a virtual environment to isolate project dependencies:
+   
+    `python3 -m venv venv` 
     
+3.  Activate the virtual environment:
+    
+    -   On **Linux/MacOS**:
+        
+        `source venv/bin/activate` 
+        
+    -   On **Windows**:
 
- 
+        
+        `venv\Scripts\activate` 
+        
+4.  Install the required Python dependencies:
+    
     `pip install -r requirements.txt` 
     
-3.  Run the Flask server:    
+5.  Run the Flask server:
     
     `python app.py` 
     
     The backend will be running at `http://localhost:5000`.
+    
+6.  Deactivate the virtual environment when done:
+    
+    `deactivate`
 
 ### Frontend Setup (React)
 
