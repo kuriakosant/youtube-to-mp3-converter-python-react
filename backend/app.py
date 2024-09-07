@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify, send_file
 from pytube import YouTube
+from flask_cors import CORS
 import os
 from moviepy.editor import VideoFileClip
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
-# Endpoint to convert YouTube video to MP3
 @app.route('/convert', methods=['POST'])
 def convert():
     try:

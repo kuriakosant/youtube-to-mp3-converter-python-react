@@ -2,3 +2,6 @@ flask
 pytube
 moviepy
 pytest
+Flask-CORS
+
+
