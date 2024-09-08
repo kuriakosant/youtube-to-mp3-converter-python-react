@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './App.css';  // Import the CSS file
 
-function App() {
+function Home() {
   const [url, setUrl] = useState('');
   const [downloading, setDownloading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,7 +12,7 @@ function App() {
 
     try {
       const response = await axios.post('http://localhost:5000/convert', { url }, {
-        responseType: 'blob', // We expect a blob (MP3 file) in response
+        responseType: 'blob', // Expect blob response for the MP3 file
       });
 
       // Create a URL for the downloaded MP3 file
@@ -32,25 +31,23 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="converter-container">
-        <h1>YouTube to MP3 Converter</h1>
-        <div className="input-section">
-          <input
-            type="text"
-            className="input-box"
-            placeholder="Insert a YouTube video URL"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-          <button onClick={handleConvert} className="convert-btn" disabled={downloading}>
-            {downloading ? 'Converting...' : 'Convert'}
-          </button>
-        </div>
-        {error && <p className="error-text">{error}</p>}
+    <div className="converter-container">
+      <h1>YouTube to MP3 Converter</h1>
+      <div className="input-section">
+        <input
+          type="text"
+          className="input-box"
+          placeholder="Insert a YouTube video URL"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+        <button onClick={handleConvert} className="convert-btn" disabled={downloading}>
+          {downloading ? 'Converting...' : 'Convert'}
+        </button>
       </div>
+      {error && <p className="error-text">{error}</p>}
     </div>
   );
 }
 
-export default App;
+export default Home;
